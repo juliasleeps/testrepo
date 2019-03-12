@@ -9,4 +9,4 @@ var print = function () {
 }
 
 emp.on('click', print);
-emp.emit('print');
+emp.emit('click');
