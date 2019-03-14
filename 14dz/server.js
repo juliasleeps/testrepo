@@ -1,5 +1,6 @@
 var http = require('http');
 var fs = require('fs');
+const request = require('request');
 var port = 3000;
 
 http.createServer(function(req, res){
@@ -14,7 +15,7 @@ http.createServer(function(req, res){
         fs.readFile('index.html', 'utf8', function(err, data){
             if(err){console.log(err)};
             res.write(data);
-            res.end() 
+            res.end();
         })       
     } else{
         res.write('404 page is not found')

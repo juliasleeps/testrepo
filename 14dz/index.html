@@ -6,5 +6,30 @@
  </head>
  <body>
     <h1>This is data from HTML file</h1>
+    <div id="curr"></div>
+    <script type="text/javascript">
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload = function(){
+      if(this.status === 200){
+          try{
+            var resObj = JSON.parse(this.responseText);
+            var curr = document.getElementById('curr');
+            resObj.forEach(element => {
+              var p = document.createElement('p');
+              p.innerHTML = `You can buy ${JSON.stringify(element.ccy)} for ${JSON.stringify(element.buy)} ${JSON.stringify(element.base_ccy)}`;
+              curr.appendChild(p);
+            });
+          } catch (e){
+            console.warn('Could not parse JSON')
+          }
+        } else{
+          console.warn('Did not receive 200 OK from response')
+        }
+      }
+
+    xhr.open('GET', 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=3&fbclid=IwAR3EQL9oXx9zcwLC3I7t6e-9wtC52KoWIZPDUfwdjvViLF2mVezBdd-LmJA')
+    xhr.send();
+    </script>
  </body> 
 </html>
